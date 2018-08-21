@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年8月7日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Core.SortFilterProxyModel
+@description: QListView排序模型
+"""
+
 from PyQt5.QtCore import QSortFilterProxyModel, Qt
 
 
-# Created on 2018年8月7日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Core.SortFilterProxyModel
-# description: QListView排序模型
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""
@@ -28,7 +31,7 @@ class SortFilterProxyModel(QSortFilterProxyModel):
             # 按照时间倒序排序
             leftData = leftData.split('-')[-1]
             rightData = rightData.split('-')[-1]
-            return leftData < rightData
+            return leftData > rightData
 #         elif self.sortOrder() == Qt.AscendingOrder:
 #             #按照名字升序排序
 #             leftData = leftData.split('-')[0]

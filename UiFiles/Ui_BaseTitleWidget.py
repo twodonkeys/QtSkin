@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'F:\Python\QtSkin\UiFiles\BaseTitleWidget.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,21 +11,32 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_BaseTitleWidget(object):
     def setupUi(self, BaseTitleWidget):
         BaseTitleWidget.setObjectName("BaseTitleWidget")
-        BaseTitleWidget.resize(513, 28)
+        BaseTitleWidget.resize(375, 28)
+        BaseTitleWidget.setMinimumSize(QtCore.QSize(0, 28))
+        BaseTitleWidget.setMaximumSize(QtCore.QSize(16777215, 28))
         self.horizontalLayout = QtWidgets.QHBoxLayout(BaseTitleWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(200, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.labelIcon = QtWidgets.QLabel(BaseTitleWidget)
+        self.labelIcon.setMinimumSize(QtCore.QSize(28, 0))
+        self.labelIcon.setMaximumSize(QtCore.QSize(28, 16777215))
+        self.labelIcon.setText("")
+        self.labelIcon.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelIcon.setObjectName("labelIcon")
+        self.horizontalLayout.addWidget(self.labelIcon)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.labelTitle = QtWidgets.QLabel(BaseTitleWidget)
         self.labelTitle.setText("")
         self.labelTitle.setAlignment(QtCore.Qt.AlignCenter)
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout.addWidget(self.labelTitle)
-        spacerItem1 = QtWidgets.QSpacerItem(92, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.buttonClose = QtWidgets.QPushButton(BaseTitleWidget)
+        self.buttonClose.setMinimumSize(QtCore.QSize(28, 28))
+        self.buttonClose.setMaximumSize(QtCore.QSize(28, 28))
         self.buttonClose.setObjectName("buttonClose")
         self.horizontalLayout.addWidget(self.buttonClose)
 

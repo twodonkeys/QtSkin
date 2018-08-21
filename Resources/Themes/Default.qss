@@ -10,6 +10,7 @@
 /*上下左右边距*/
 #menubar::item {
     padding: 10px 10px;
+    background-color: rgb(54, 55, 56);
 }
 /*鼠标悬停背景颜色*/
 #menubar::item:hover {
@@ -47,11 +48,9 @@
 
 /*标题栏*/
 TitleWidget {
-    min-height: 40px;
-    background-color: rgb(54, 55, 56);
+    /*background-color: rgb(54, 55, 56);*/
 }
 BaseTitleWidget {
-    min-height: 28px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     background-color: rgb(54, 55, 56);
@@ -62,18 +61,12 @@ TitleWidget > #labelTitle, BaseTitleWidget > #labelTitle {
 }
 /*标题栏右侧工具按钮*/
 TitleWidget > QPushButton {
-    min-height: 40px;
-    max-width: 36px;
     color: rgb(165, 165, 165);
     border: none;
     font-size: 12pt;
     font-family: "Webdings";
 }
 BaseTitleWidget > QPushButton {
-    min-width: 28px;
-    max-width: 28px;
-    min-height: 28px;
-    max-height: 28px;
     color: rgb(165, 165, 165);
     border: none;
     border-top-right-radius: 4px;
@@ -96,7 +89,6 @@ TitleWidget > #buttonClose:pressed, BaseTitleWidget > #buttonClose:pressed {
 }
 /*标题栏登录按钮*/
 TitleWidget > #buttonLogin {
-    max-width: 60px;
     color: rgb(36, 175, 255);
     font-family: "qtskin";
 }
@@ -114,19 +106,24 @@ TitleWidget > #lineLogin {
     margin-bottom: 8px;
 }
 
-/*登录对话框*/
-LoginWidget > #loginWidgetBg {
+/*弹出对话框背景*/
+#dialogWidgetBg {
     border-radius: 4px;
     background-color: rgb(44, 45, 46);
 }
 /*激活状态*/
-#loginWidgetBg[active="true"] {
-    border: 1px solid rgb(36, 175, 255);
+#dialogWidgetBg[active="true"] {
+    border: 1px solid rgba(36, 175, 255, 150);
 }
 /*非激活状态*/
-#loginWidgetBg[active="false"] {
+#dialogWidgetBg[active="false"] {
     border: 1px solid transparent; /*透明边框*/
 }
+/*错误状态*/
+#dialogWidgetBg[active="error"] {
+    border: 1px solid rgba(255, 0, 0, 150);
+}
+
 #labelHead {
     font-size: 80px;
     font-family: "qtskin";
@@ -136,7 +133,7 @@ LoginWidget > #loginWidgetBg {
     font-family: "qtskin";
     color: red;
 }
-#editUsername, #editPassword {
+#editUsername, #editPassword, #editProjectName {
     padding: 0px 0px 0px 8px;  /*上右下左*/
     border-radius: 4px;
     border: 1px solid transparent; /*透明边框*/
@@ -144,7 +141,7 @@ LoginWidget > #loginWidgetBg {
     selection-color: black; /*选中文字的颜色*/
     selection-background-color: rgb(181, 213, 255); /*选中文字背景色*/
 }
-#editUsername:focus, #editPassword:focus {
+#editUsername:focus, #editPassword:focus, #editProjectName:focus {
     border-radius: 4px;
     border: 1px solid rgb(36, 175, 255);
 }
@@ -155,55 +152,92 @@ QLineEdit {
     padding: 0px 8px;  /*上下0 左右8*/
 }
 
-#loginWidgetEdit > #buttonLogin {
+/*登录按钮、创建项目按钮、对话框确定按钮*/
+#loginWidgetEdit > #buttonLogin, #buttonCreate, #buttonOk {
     color: white;
     border-radius: 4px;
     background-color: rgb(36, 175, 255);
 }
-#loginWidgetEdit > #buttonLogin:hover {
+#loginWidgetEdit > #buttonLogin:hover, #buttonCreate:hover, #buttonOk:hover {
     background-color: rgb(58, 183, 255);
 }
-#loginWidgetEdit > #buttonLogin:pressed {
+#loginWidgetEdit > #buttonLogin:pressed, #buttonCreate:pressed, #buttonOk:pressed {
     background-color: rgb(34, 168, 245);
 }
 
+/*对话框内容文字颜色*/
+#labelMessage {
+    color: white;
+}
+
+/*对话框取消按钮*/
+#buttonCancel {
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(78, 79, 81);
+}
+#buttonCancel:hover {
+    background-color: rgb(98, 99, 101);
+}
+#buttonCancel:pressed {
+    background-color: rgb(73, 74, 76);
+}
+
 /*首页、我的项目页面*/
-#widgetHome, #listViewProjects {
+#widgetHome, #widgetWorkspace, #listViewProjects, #listViewFiles, QSplitter {
     background-color: rgb(35, 35, 36);
 }
+
+QSplitter::handle {
+    background-color: rgb(35, 35, 36);
+}
+QSplitter::handle:horizontal {
+    width: 2px;
+}
+QSplitter::handle:vertical {
+    height: 2px;
+}
+QSplitter::handle:pressed {
+    background-color: rgb(52, 53, 57);
+}
+
 /*去掉item虚线边框*/
-#listViewProjects {
+#listViewProjects, #listViewFiles {
     outline: 0px;
 }
 /*item的悬停和选中效果*/
-#listViewProjects::item:hover {
+#listViewProjects::item:hover, #listViewFiles::item:hover {
     /*从上到下的透明白色到黑色渐变*/
     border-radius: 6px;
     background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0.8, stop:0 rgba(0, 0, 0, 100), stop:1 rgba(255, 255, 255, 0));
 }
-#listViewProjects::item:selected {
+#listViewProjects::item:selected, #listViewFiles::item:selected {
     border-radius: 6px;
     border: 2px solid rgb(32, 155, 227);
 }
-#listViewProjects::item:selected:!active {
+#listViewProjects::item:selected:!active, #listViewFiles::item:selected:!active {
     border-radius: 6px;
     border: 2px solid rgb(32, 155, 227);
 }
 
 /*我的项目、创建项目的面板背景*/
-#widgetMyProject {
+#widgetNavbar {
+    border-top: 1px solid rgb(40, 41, 41);
+    border-bottom: 1px solid rgb(28, 28, 29);
     background-color: rgb(44, 45, 46);
 }
-/*创建项目按钮*/
-#buttonAddProject {
+/*创建项目, 添加文件按钮*/
+#buttonAddProject, #buttonAddFile {
     border: none;
     border-radius: 4px;
-    padding: 0px 10px;
     color: white;
     font-family: "qtskin";
     background-color: rgb(36, 175, 255);
 }
-#buttonAddProject:pressed {
+#buttonAddProject:hover, #buttonAddFile:hover {
+    background-color: rgb(58, 183, 255);
+}
+#buttonAddProject:pressed, #buttonAddFile:pressed {
     background-color: rgb(34, 168, 245);
 }
 
@@ -237,10 +271,6 @@ ProjectItemWidget {
     background-color: rgb(73, 75, 77);
 }
 #buttonDelete {
-    min-width: 30px;
-    max-width: 30px;
-    min-height: 30px;
-    max-height: 30px;
     font-family: "qtskin";
     font-size: 20px;
     border: none;
@@ -318,10 +348,10 @@ QStatusBar::item {
 
 /*底部状态栏右下角按钮*/
 #buttonHome, #buttonShare {
-    min-width: 24px;
-    max-width: 24px;
-    min-height: 24px;
-    max-height: 24px;
+    min-width: 25px;
+    max-width: 25px;
+    min-height: 25px;
+    max-height: 25px;
     border: none;
     font-weight: bold;
     font-family: "qtskin";
@@ -332,4 +362,24 @@ QStatusBar::item {
 }
 #buttonHome:pressed, #buttonShare:pressed {
     background-color: rgb(48, 49, 50);
+}
+
+/***********项目设计页面***********/
+
+/*我的项目,项目名按钮*/
+#buttonMyProject, #buttonCurrentProject {
+    font-family: "qtskin";
+    background-color: transparent;
+}
+#buttonMyProject:hover, #buttonCurrentProject:hover {
+    color: rgb(202, 202, 202);
+}
+#vLine {
+    color: rgb(90, 91, 92);
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+/*右侧设计面板*/
+#toolWidget {
+    background-color: rgb(44, 45, 46);
 }

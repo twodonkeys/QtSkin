@@ -1,16 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年8月8日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Core.Dialog
+@description:
+"""
+
 import ctypes.wintypes
 
 from PyQt5.QtWidgets import QDialog
 
 
-# Created on 2018年8月8日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Core.Dialog
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""
@@ -34,8 +37,13 @@ class Dialog:
         """边框闪烁动画
         :param actived: 是否激活
         """
-        # 修改控件的自定义属性
-        self.BorderWidget.setProperty('active', actived)
+        if not actived:  # 未激活
+            self.BorderWidget.setProperty('active', False)
+        else:  # 激活
+            if self.property('active') == 'error':
+                self.BorderWidget.setProperty('active', 'error')
+            else:
+                self.BorderWidget.setProperty('active', True)
         # 刷新它的样式
         self.style().polish(self.BorderWidget)
 

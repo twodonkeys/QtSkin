@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'F:\Python\QtSkin\UiFiles\ProjectItemWidget.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -30,6 +30,8 @@ class Ui_ProjectItemWidget(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
         self.buttonDelete = QtWidgets.QPushButton(self.widgetTool)
+        self.buttonDelete.setMinimumSize(QtCore.QSize(30, 30))
+        self.buttonDelete.setMaximumSize(QtCore.QSize(30, 30))
         self.buttonDelete.setObjectName("buttonDelete")
         self.horizontalLayout_3.addWidget(self.buttonDelete)
         self.horizontalLayout.addWidget(self.widgetTool)

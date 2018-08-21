@@ -7,14 +7,17 @@ Created on 2018年8月6日
 @site: https://github.com/892768447
 @email: 892768447@qq.com
 @file: Widgets.Items.ProjectItemWidget
-@description: 
+@description: 主页项目Item
 """
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter
+from datetime import datetime
+
+from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal
+from PyQt5.QtGui import QPainter, QStandardItem
 from PyQt5.QtWidgets import QLabel
 
 from UiFiles.Ui_ProjectItemWidget import Ui_ProjectItemWidget
+from Widgets.Dialogs.MessageDialog import MessageDialog
 
 
 __Author__ = """By: Irony
@@ -26,11 +29,44 @@ __Version__ = "Version 1.0"
 
 class ProjectItemWidget(QLabel, Ui_ProjectItemWidget):
 
-    def __init__(self, *args, **kwargs):
+    itemDeleted = pyqtSignal(QStandardItem)
+
+    def __init__(self, project, item, *args, **kwargs):
         super(ProjectItemWidget, self).__init__(*args, **kwargs)
         self.setupUi(self)
         # 隐藏删除按钮
         self.buttonDelete.setVisible(False)
+        self._project = project
+        self._item = item
+        self.setName(project.name)
+#         self.setTime(project.time.split('-')[0])
+        self.setTime(datetime.strptime(
+            project.time, '%Y/%m/%d-%H:%M:%S').strftime('%Y/%m/%d'))
+
+    @property
+    def project(self):
+        return self._project
+
+    @property
+    def item(self):
+        return self._item
+
+    @pyqtSlot()
+    def on_buttonDelete_clicked(self):
+        # 删除项目
+        if MessageDialog.question(
+            self,
+            self.tr('Delete "{}" project?').format(self._project.name),
+            self.tr('Delete operation cannot be resumed.')
+        ) != MessageDialog.Accepted:
+            return
+
+        # 删除项目的所有文件
+        ret = self._project.delete()
+        if ret:  # 报错
+            MessageDialog.error(self, self.tr('Error'), ret)
+        # 不管成功与否都要删除item
+        self.itemDeleted.emit(self._item)
 
     def setName(self, name):
         """
@@ -84,8 +120,7 @@ if __name__ == '__main__':
     from Utils.Tools import readData
     app = QApplication(sys.argv)
     app.setStyleSheet(readData('../../Resources/Themes/Default.qss'))
-    QFontDatabase.addApplicationFont('../../Resources/qtskin.ttf')
-    w = ProjectItemWidget()
+    QFontDatabase.addApplicationFont('../../Resources/Fonts/qtskin.ttf')
+    w = ProjectItemWidget({'name': 'name', 'time': '2018/8/9'})
     w.show()
-    w.setName('test').setTime('2017/08/06')
     sys.exit(app.exec_())
